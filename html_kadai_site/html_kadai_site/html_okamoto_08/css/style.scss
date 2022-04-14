@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+header {
+    background-color: white;
+    display: flex;
+    .logo{
+    }
+    .menu{
+        ul {
+            display: flex;
+            color: red;
+        }
+    }  
+}
