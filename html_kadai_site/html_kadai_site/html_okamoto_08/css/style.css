@@ -6,7 +6,7 @@ header {
 }
 
 header .logo {
-  height: 50px;
+  height: 100px;
 }
 
 header .menu ul {
@@ -18,5 +18,9 @@ header .menu ul {
 
 header .menu ul li {
   padding: 50px;
+}
+
+header .menu ul li a {
+  color: black;
 }
 /*# sourceMappingURL=style.css.map */

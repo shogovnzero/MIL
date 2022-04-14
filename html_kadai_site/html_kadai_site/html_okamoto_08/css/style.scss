@@ -4,7 +4,7 @@ header {
     background-color: white;
     display: flex;
     .logo{
-        height: 50px;
+        height: 100px;
     }
     .menu{
         ul {
@@ -12,6 +12,9 @@ header {
             color: red;
             li {
                 padding: 50px;
+                a {
+                    color: black;
+                }
             }
         }
     }  
