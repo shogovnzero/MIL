@@ -5,6 +5,10 @@ header {
   display: flex;
 }
 
+header .logo {
+  height: 50px;
+}
+
 header .menu ul {
   display: -webkit-box;
   display: -ms-flexbox;
