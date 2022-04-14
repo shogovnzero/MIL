@@ -9,6 +9,9 @@ header {
         ul {
             display: flex;
             color: red;
+            li {
+                padding: 50px;
+            }
         }
     }  
 }

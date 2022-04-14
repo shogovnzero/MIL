@@ -11,4 +11,8 @@ header .menu ul {
   display: flex;
   color: red;
 }
+
+header .menu ul li {
+  padding: 50px;
+}
 /*# sourceMappingURL=style.css.map */
