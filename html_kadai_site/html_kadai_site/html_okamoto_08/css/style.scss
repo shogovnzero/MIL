@@ -1,21 +1,342 @@
 @charset "utf-8";
 
-header {
-    background-color: white;
+@mixin position-center {
     display: flex;
-    .logo{
-        height: 100px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin btn {
+    width: 300px;
+    height: 60px;
+    background-color: #222222;
+    opacity: 0.7;
+    a {
+        text-decoration: none;
+        color: #fff;
+        p {
+            text-align: center;
+            padding: 21px 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
     }
-    .menu{
-        ul {
-            display: flex;
-            color: red;
-            li {
-                padding: 50px;
-                a {
-                    color: black;
+}
+
+body {
+    font-family: "Segoe UI", "Yu Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Meiryo UI", sans-serif;
+}
+
+// header
+#header {
+    position: fixed;
+    z-index: 4;
+    width: 100%;
+    .container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0 auto;
+        background-color: #fff;
+        .area_logo_header {
+            margin-bottom: 3px;
+            .logo {
+                display: block;
+                padding: 15px;
+                img {
+                    height: 43px;
+                    vertical-align: top;
+                }
+            }
+        }
+        .area_nav_header{
+            margin-left: auto;
+            .list_nav_header {
+                height: 100%;
+                display: flex;
+                .item_nav_header {
+                    font-size: 21px;
+                    color: #222222;
+                    text-decoration: none;
+                    li {
+                        text-align: center;
+                        height: 70px;
+                        line-height: 73px;
+                        margin-right: 50px;
+                    }
+                }
+                .item_nav_header:hover {
+                    color: #ffd61a;
+                    li {
+                        border-bottom: 3px solid #ffd61a;
+                    }
+                    transition: all 0.3s 0s ease;
                 }
             }
         }
     }  
+}
+
+// top view
+.mainvisual {
+    padding-top: 73px;
+    background: url(../img/mainbg.png) no-repeat bottom center;
+    background-size: cover;
+    .container {
+        @include position-center;
+        height: 600px;
+        color: #fff;
+        .main_ttl {
+            font-weight: 900;
+            font-size: 60px;
+            padding-bottom: 30px;
+        }
+        .main_subttl {
+            font-weight: 100;
+            font-size: 40px;
+        }
+    }
+}
+
+// uniform style for body
+section {
+    .container {
+        @include position-center;
+        width: 100%;
+        // title
+        .section_head {
+            margin-top: 60px;
+            @include position-center;
+            .section_ttl_yellow {
+                font-size: 24px;
+                font-weight: 700;
+                color: #ffd61a;
+                margin-bottom: 30px;
+            }
+            .section_ttl_black {
+                font-size: 24px;
+                font-weight: 700;
+                color: #222222;
+                margin-bottom: 30px;
+            }
+            .section_subttl {
+                font-size: 18px;
+                color: #222222;
+                margin-bottom: 60px;
+            }
+        }
+        // description
+        .section_body {
+            margin-bottom: 60px;
+            @include position-center;
+            .description {
+                font-size: 16px;
+                color: #222222;
+                line-height:180%;
+            }
+            .space {
+                margin-top: 40px;
+            }
+        }
+        .image_about {
+            .list_image_about {
+                display: flex;
+                width: 100%;
+            }
+        }
+    }
+}
+
+// style for course
+#area_course {
+    .container {
+        .layout_2_div {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            .image_course {
+                width: 50%;
+            }
+            .text_course {
+                background-color: #fafafa;
+                width: 50%;
+                display: flex;
+                align-items: center;
+                .content_course_right {
+                    margin-left: 30px;
+                    margin-right: auto;
+                    width: 430px;
+                }
+                .content_course_left {
+                    margin-right: 30px;
+                    margin-left: auto;
+                    width: 430px;
+                }
+                .ttl_course {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #222222;
+                    margin-bottom: 40px;
+                }
+                .description_course {
+                    font-size: 16px;
+                    color: #222222;
+                    line-height:180%;
+                }
+            }
+        }
+    }
+}
+
+// style for news
+#area_news {
+    .container {
+        .section_body {
+            display: flex;
+            flex-direction: row;
+            // news items
+            .item_news {
+                width: 300px;
+                padding: 15px;
+                a {
+                    color: #222222;
+                    text-decoration: none;
+                    .item_news_description {
+                        .news_date {
+                            margin: 30px auto 24px;
+                        }
+                        .news_summary {
+                            line-height: 180%;
+                        }
+                    }
+                }
+            }
+            // hover for news items
+            .item_news:hover {
+                box-shadow: 0px 0px 5px;
+                transition: all 0.3s 0s ease;
+            }
+        }
+        // button to more news
+        .news_more {
+            @include btn;
+            margin-bottom: 60px;
+        }
+        .news_more:hover {
+            background-color: #ffd61a;
+            opacity: 1;
+            box-shadow: 0px 0px 5px;
+            transition: all 0.3s 0s ease;
+        }
+    }
+}
+
+// style for access
+#area_access {
+    .container {
+        background-color: #fafafa;
+        .section_body {
+            width: 100%;
+            // map
+            .access_map {
+                width: 100%;
+            }
+            // access information
+            .access_summary {
+                margin-top: 60px;
+                .access_summary_table {
+                    border-collapse: separate;
+                    border-spacing: 30px;
+                    tr {
+                        td {
+                            padding-left: 50px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// style for contact
+#area_contact {
+    .container {
+        .form_contact {
+            @include position-center;
+            // form
+            form {
+                .table_form {
+                    display: table;
+                    border-collapse: separate;
+                    table-layout: fixed;
+                    width: 100%;
+                    @include position-center;
+                    .item_form {
+                        th {
+                            width: 240px;
+                            height: auto;
+                            vertical-align: top;
+                            text-align: left;
+                            padding: 16px 64px 16px 16px;
+                            border-top: 1px solid #bfbfbf;
+                            border-right: 1px solid #bfbfbf;
+                        }
+                        td {
+                            width: 400px;
+                            height: auto;
+                            vertical-align: middle;
+                            padding: 8px;
+                            border-top: 1px solid #bfbfbf;
+                            .input_box {
+                                width: 100%;
+                            }
+                            select {
+                                width: 100%;
+                            }
+                            ul {
+                                li {
+                                    margin: 24px 0px;
+                                }
+                            }
+                            textarea {
+                                width: 100%;
+                                height: 150px;
+                            }
+                        }
+                        .item_end {
+                            border-top: 1px solid #bfbfbf;
+                            border-bottom: 1px solid #bfbfbf;
+                        }
+                    }
+                }
+            }
+            // send button
+            .send {
+                @include btn;
+                margin: 30px auto 140px;
+            }
+            .send:hover {
+                background-color: #ffd61a;
+                opacity: 1;
+                box-shadow: 0px 0px 5px;
+                transition: all 0.3s 0s ease;
+            }
+        }
+
+    }
+}
+
+// footer
+#footer {
+    background-color: #707070;
+    width: 100%;
+    height: 80px;
+    @include position-center;
+    .footer_description {
+        color: #fff;
+        font-size: 16px;
+    }
 }
