@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="js/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <!-- header -->
+  <header>
+    <h1>JANKEN Analizer</h1>
+    <h2>- ROCK PAPER SCISSORS -</h2>
+  </header>
+
+  <div class="container">
+    <!-- play section -->
+    <section id="play">
+        <div class="horizontal_2_div">
+          <div class="horizontal_2_left">
+            <p class="player">YOU</p>
+            <ul>
+              <li class="player_btn" id="player_btn_rock"><p>ROCK</p></li>
+              <li class="player_btn" id="player_btn_paper"><p>PAPER</p></li>
+              <li class="player_btn" id="player_btn_scissors"><p>SCISSORS</p></li>
+            </ul>
+          </div>
+          <div class="horizontal_2_right">
+            <p class="player">COM</p>
+            <ul>
+              <li class="com_btn" id="com_btn_rock"><p>ROCK</p></li>
+              <li class="com_btn" id="com_btn_paper"><p>PAPER</p></li>
+              <li class="com_btn" id="com_btn_scissors"><p>SCISSORS</p></li>
+            </ul>
+          </div>
+        </div>
+        <div class="area_judgement">
+          <div id="judgement"></div>
+        </div>
+    </section>
+    <!-- analysis section -->
+    <section id="analysis">
+      <div class="horizontal_3_div">
+        <div class="horizontal_3_left">
+          <canvas id="judge_record"></canvas>
+        </div>
+        <div class="horizontal_3_center">
+          <canvas id="player_record"></canvas>
+        </div>
+        <div class="horizontal_3_right">
+          <canvas id="com_record"></canvas>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>©janken analyzer 2022</p>
+  </footer>
+
+  <!-- import chart.js for janken analysis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+  <script>
+    // variables for janken analysis
+    // judge record
+    let win = 0, draw = 0, lose = 0;
+    var judge_canvas = document.getElementById("judge_record");
+    let judge_record_chart;
+    // player hand record
+    let player_rock = 0, player_paper = 0, player_scissors = 0;
+    var player_canvas = document.getElementById("player_record");
+    let player_record_chart;
+    // com hand record
+    let com_rock = 0, com_paper = 0, com_scissors = 0;
+    var com_canvas = document.getElementById("com_record");
+    let com_record_chart;
+
+    // draw chart methods for janken analysis
+    function draw_chart() {
+      // judge record chart
+      judge_record_chart = new Chart(judge_canvas, {
+        type: "pie",
+        data: {
+          labels: ["Win", "Draw", "Lose"],
+          datasets: [{
+            data: [win, draw, lose],
+            backgroundColor: ["rgba(192,0,0,1)","rgba(112,48,160,1)","rgba(0,117,194,1)"]
+          }],
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "JANKEN Record",
+            },            
+          },
+        },
+      });
+      // player record chart
+      player_record_chart = new Chart(player_canvas, {
+        type: "pie",
+        data: {
+          labels: ["Rock", "Paper", "Scissors"],
+          datasets: [{
+            data: [player_rock, player_paper, player_scissors],
+            backgroundColor: ["rgba(192,0,0,1)","rgba(112,48,160,1)","rgba(0,117,194,1)"]
+          }],
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Player's Hand Record",
+            },            
+          },
+        },
+      })
+      // com record chart
+      com_record_chart = new Chart(com_canvas, {
+        type: "pie",
+        data: {
+          labels: ["Rock", "Paper", "Scissors"],
+          datasets: [{
+            data: [com_rock, com_paper, com_scissors],
+            backgroundColor: ["rgba(192,0,0,1)","rgba(112,48,160,1)","rgba(0,117,194,1)"]
+          }],
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "COM's Hand Record",
+            },            
+          },
+        },
+      })      
+    };
+
+    // variables for janken play
+    let player_hand, com_hand;
+    let judge;
+    let judge_matrix = [
+      [0,1,-1], //player=gu; pc=gu, cho, par;
+      [-1,0,1], //player=cho; pc=gu, cho, par;
+      [1,-1,0],  //player=par; pc=gu, cho, par;
+    ];
+    let timerID_com_rock, timerID_com_scissors, timerID_com_paper, timerID_judge;
+    
+    // main JS process
+
+    // player's hand
+    $("#player_btn_rock").on("click", function(){
+      player_hand = 0;
+      player_rock += 1;
+    });
+    $("#player_btn_scissors").on("click", function(){
+      player_hand = 1;
+      player_scissors += 1;
+    });
+    $("#player_btn_paper").on("click", function(){
+      player_hand = 2;
+      player_paper += 1;
+    });
+
+    $(".player_btn").on("click", function(){
+      // clearTimeout
+      clearTimeout(timerID_com_rock);
+      clearTimeout(timerID_com_scissors);
+      clearTimeout(timerID_com_paper);
+      clearTimeout(timerID_judge);
+
+      // computer's hand
+      com_hand = Math.floor(Math.random() * 3);
+
+      // judgement
+      judge = judge_matrix[player_hand][com_hand]
+
+      // result pc_hand
+      if (com_hand == 0){
+        com_rock += 1;
+        $("#com_btn_rock").html("<li>ROCK</li>");
+        $("#com_btn_scissors").html("<li></li>");
+        $("#com_btn_paper").html("<li></li>");
+      } else if (com_hand == 1){
+        com_scissors += 1;
+        $("#com_btn_rock").html("<li></li>");
+        $("#com_btn_scissors").html("<li>SCISSORS</li>");
+        $("#com_btn_paper").html("<li></li>");
+      } else {
+        com_paper += 1;
+        $("#com_btn_rock").html("<li></li>");
+        $("#com_btn_scissors").html("<li></li>");
+        $("#com_btn_paper").html("<li>PAPER</li>");
+      }
+      timerID_com_rock = setTimeout(function(){$("#com_btn_rock").html("<li><p>ROCK</p></li>");},1500)
+      timerID_com_scissors = setTimeout(function(){$("#com_btn_scissors").html("<li><p>SCISSORS</p></li>")},1500)
+      timerID_com_paper = setTimeout(function(){$("#com_btn_paper").html("<li><p>PAPER</p></li>")},1500)
+
+      // result judge
+      if (judge == 1) {
+        win += 1;
+        $("#judgement").html("<div>WIN</div>");
+        $("#judgement").css("color", "rgb(192,0,0)")
+      } else if (judge == 0) {
+        draw += 1;
+        $("#judgement").html("<div>DRAW</div>");
+        $("#judgement").css("color", "rgb(112,48,160)")
+      } else {
+        lose += 1;
+        $("#judgement").html("<div>LOSE</div>");
+        $("#judgement").css("color", "rgb(0,117,194)")
+      }
+      timerID_judge = setTimeout(function() {$("#judgement").html("<div></div>")},1500)
+
+      // draw janken record
+      if (judge_record_chart) {
+        judge_record_chart.destroy();
+      };
+      if (player_record_chart) {
+        player_record_chart.destroy();
+      };
+      if (com_record_chart) {
+        com_record_chart.destroy();
+      };
+      draw_chart();
+
+    });
+  </script>
+
+</body>
+</html>
