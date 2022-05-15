@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>繰り返し処理：for</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+    <div>
+        <!-- セレクトボックス作成[START] -->
+        <select id="year"></select>
+        <select id="month"></select>
+        <select id="day"></select>
+        <!-- セレクトボックス作成[END] -->
+    </div>
+<script>
+//年:1900~2022
+let yearHTML = '';
+
+for(let i=1900; i<2023; i++) {
+    yearHTML += `<option value="${i}">${i}</option>`;
+}
+$('#year').html(yearHTML);
+
+//月:1~12
+let monthHTML = '';
+
+for (let i=1; i<13; i++) {
+    monthHTML += `<option value="${i}">${i}</option>`
+}
+$('#month').html(monthHTML);
+
+//日:1~31
+let dayHTML = '';
+
+for (let i=1; i<32; i++) {
+    dayHTML += `<option value="${i}">${i}</option>`
+}
+$('#day').html(dayHTML);
+
+
+</script>
+</body>
+</html>

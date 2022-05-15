@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ToDo Manager</title>
+<link rel="stylesheet" href="css/kanban_SO_Mod.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jkanban@1.3.1/dist/jkanban.min.css"> -->
+<script src="js/jquery-2.1.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jkanban@1.3.1/dist/jkanban.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- header -->
+        <header>
+            <h1>ToDo Manager</h1>
+        </header>
+            
+        <!-- main -->
+        <main>
+            <div class="container">
+                <div id="kanban_canvas">
+                    <!-- kanban -->
+                </div>
+            </div>
+        </main>
+        
+        <!-- footer -->
+        <footer>
+        </footer>
+    </div>
+
+    <!-- javascript -->
+    <script>
+        var json_data = localStorage.getItem("data");
+        var data = JSON.parse(json_data);
+
+        // set kanban
+        const kanban = new jKanban({
+            element: "#kanban_canvas",
+            gutter: "4px",
+            widthBoard: "282px",
+            responsivePercentage: false,
+            dragItems: true,
+            boards: data,
+            dragBoards: true,
+            itemAddOptions:{
+                enabled: true,
+                content: "+",
+            },
+            click: element => remove_item(element),
+            dragendEl: element => drag_item(element),
+            dragendBoard: element => drag_board(element),
+            buttonClick: (element,id) => add_item(id),
+        });
+
+        // remove items
+        function remove_item(element){
+            kanban.removeElement(element.dataset.eid);
+            create_data();
+        };
+
+        // drag items
+        function drag_item(element){
+            create_data();
+        };
+
+        // drag board
+        function drag_board(element){
+            create_data();
+        };
+
+        // add items
+        var item_ids = localStorage.getItem("item_ids");
+        function add_item(id) {
+            const task = document.createElement("input");
+            kanban.addForm(id, task);
+            task.focus();
+            task.addEventListener("blur", e => {
+                kanban.addElement(id, {id:`item_id_${item_ids++}`, title:e.target.value});
+                task.remove();
+                create_data();
+                localStorage.setItem("item_ids",item_ids);
+            });
+        };
+
+        // save data
+        function create_data(){
+            var jkanban_data = [];
+            for(let i=0; i<data.length; i++){
+                const board_list = {
+                    id: data[i].id,
+                    title: data[i].title,
+                    item: [],
+                };
+                kanban.getBoardElements(data[i].id).forEach(item => {
+                    board_list.item.push({
+                        id: item.dataset.eid,
+                        title: item.textContent,
+                    });
+                });
+                jkanban_data.push(board_list);
+            };
+            var jkanban_data = JSON.stringify(jkanban_data);
+            localStorage.setItem("data",jkanban_data);
+        };
+        
+        // rename board
+        // $(".kanban-board-header").on("click", function(e){
+        //     console.log(e.target.text);
+        // });
+        
+        // Add boards
+        // let board_ids = 0;
+        // var add_board = document.getElementById("btn_add_board");
+        // add_board.addEventListener("click",function(){
+        //     kanban.addBoards([{"id":`board_id_${board_ids++}`,"title":"default"}]); //title要編集
+        // });
+
+    </script>
+
+</body>
+</html>
