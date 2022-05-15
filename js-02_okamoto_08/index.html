@@ -34,6 +34,13 @@
     <script>
         var json_data = localStorage.getItem("data");
         var data = JSON.parse(json_data);
+        if (data = []){
+            data = [
+                {"id":"board_id_1", "title":"Board 1"},
+                {"id":"board_id_2", "title":"Board 2"},
+                {"id":"board_id_3", "title":"Board 3"},
+            ]
+        };
 
         // set kanban
         const kanban = new jKanban({
