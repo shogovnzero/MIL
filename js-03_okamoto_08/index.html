@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Chat Application</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>トークルーム</h1>
+        </header>
+        <!-- message -->
+        <main id = "room">
+            <div id = "upper_space"></div>
+            <div id="output"></div>
+            <div id = "lower_space"></div>
+        </main>
+        <!-- input -->
+        <footer>
+            <div class="area_name">
+                <input type="text" id="name_input" placeholder= "user: yourself if blank">
+            </div>
+            <div class="area_message">
+                <input type="text" id="text_input" placeholder = "message" required>
+            </div>
+            <div class="area_btn">
+                <span class="material-icons">send</span>
+            </div>
+        </footer>
+    </div>
+
+<!-- Firebase -->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.1/firebase-database.min.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+    apiKey: "",
+    authDomain: "js-03-gs.firebaseapp.com",
+    projectId: "js-03-gs",
+    storageBucket: "js-03-gs.appspot.com",
+    messagingSenderId: "751400512796",
+    appId: "1:751400512796:web:6de37ca2c52f528fd09ed9"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase(app);
+    const dbRef = ref(db, "chat");
+
+    // post function: click
+    $(".material-icons").on("click", function(){
+        var dt = new Date();
+        if($("#name_input").val() == ""){
+            var name = "you";
+        } else {
+            name = $("#name_input").val();
+        };
+        const msg = {
+            name_input: name,
+            text_input: $("#text_input").val(),
+            year: dt.getFullYear(),
+            month: dt.getMonth()+1,
+            date: ("0"+dt.getDate()).slice(-2),
+            hour: ("0"+dt.getHours()).slice(-2),
+            min: ("0"+dt.getMinutes()).slice(-2),
+        };
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        document.getElementById("name_input").value = "";
+        document.getElementById("text_input").value = "";
+    });
+
+    // post function: enter
+    $("#text_input").on("keydown", function(e){
+        if(e.keyCode === 13){
+            var dt = new Date();
+            if($("#name_input").val() == ""){
+                var name = "you";
+            } else {
+                name = $("#name_input").val();
+            };
+            const msg = {
+            name_input: name,
+            text_input: $("#text_input").val(),
+            year: dt.getFullYear(),
+            month: dt.getMonth()+1,
+            date: ("0"+dt.getDate()).slice(-2),
+            hour: ("0"+dt.getHours()).slice(-2),
+            min: ("0"+dt.getMinutes()).slice(-2),
+            }
+            const newPostRef = push(dbRef);
+            set(newPostRef, msg);
+            document.getElementById("name_input").value = "";
+            document.getElementById("text_input").value = "";
+        }
+    });
+
+    // read function
+    onChildAdded(dbRef, function (data) {
+        const msg = data.val();
+        const key = data.key;
+        var h;
+        if (msg.name_input == "you") {
+            h = `<div id = "${key}" class = "message_you">`;
+        } else {
+            h = `<div id = "${key}" class = "message_others">` + `<div class = "user">` + msg.name_input + `</div>`;
+        }
+        h += `<div class = "text">` + msg.text_input + `</div>`;
+        var dt_now = new Date();
+        if (dt_now.getFullYear() == msg.year) {
+            if (dt_now.getMonth() + 1 == msg.month) {
+                if (dt_now.getDate() == msg.date) {
+                    h +=  `<div class = "datetime">` + msg.hour + ":" + msg.min + `</div>`;
+                } else {
+                    h += `<div class = "datetime">` + msg.month + "/" + msg.date + " " + msg.hour + ":" + msg.min + `</div>`;
+                }
+            } else {
+                h += `<div class = "datetime">` + msg.month + "/" + msg.date + " " + msg.hour + ":" + msg.min + `</div>`;
+            }
+        } else {
+            h += `<div class = "datetime">` + msg.year + "/" + msg.month + "/" + msg.date + " " + msg.hour + ":" + msg.min + `</div>`;
+        };
+        h += `</div>`;
+        $("#output").append(h);
+    });
+
+    // delete
+    $("#output").on("click", ".message_you", function(){
+        remove(ref(db, `chat/${this.id}`));
+    });
+
+    $("#output").on("click", ".message_others", function(){
+        remove(ref(db, `chat/${this.id}`));
+    });
+
+    onChildRemoved(dbRef, function(data){
+        document.getElementById(data.key).remove();
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

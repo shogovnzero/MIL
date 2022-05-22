@@ -1,0 +1,144 @@
+@charset "UTF-8";
+body {
+  font-family: "Segoe UI", "Yu Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Meiryo UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  font-size: 12px;
+  z-index: 1;
+  width: 100%;
+}
+
+body .container {
+  width: 100%;
+  min-width: 300px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+body .container header {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(141, 171, 216, 0.7);
+  height: 10vh;
+}
+
+body .container header h1 {
+  z-index: 100;
+  font-size: 20px;
+}
+
+body .container #room {
+  padding: 0 2% 0;
+  background-color: #8dabd8;
+  z-index: 5;
+  height: 100vh;
+  overflow: auto;
+}
+
+body .container #room #upper_space {
+  height: 10%;
+}
+
+body .container #room #output {
+  display: block;
+}
+
+body .container #room #output .message_you {
+  margin: 1% 0% 1% 30%;
+}
+
+body .container #room #output .message_you .text {
+  background-color: #8de386;
+  font-size: 16px;
+  padding: 5px 5px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+body .container #room #output .message_others {
+  margin: 1% 30% 1% 0%;
+}
+
+body .container #room #output .message_others .user {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0.5% 1%;
+}
+
+body .container #room #output .message_others .text {
+  background-color: #fff;
+  font-size: 16px;
+  padding: 5px 5px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+body .container #room #lower_space {
+  height: 15%;
+}
+
+body .container footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 100;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #fff;
+}
+
+body .container footer .area_name {
+  width: 20%;
+  height: 100%;
+  padding: 0 5px;
+}
+
+body .container footer .area_name #name_input {
+  width: 100%;
+  font-size: 16px;
+  height: 100%;
+}
+
+body .container footer .area_message {
+  width: calc(80% - 60px);
+  padding: 0 5px;
+}
+
+body .container footer .area_message #text_input {
+  width: 100%;
+  font-size: 16px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #f6f5f5;
+  border: none;
+}
+
+body .container footer .area_btn {
+  min-width: 20px;
+}
+
+body .container footer .area_btn .material-icons {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #4f6ef6;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+/*# sourceMappingURL=style.css.map */
