@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+  <h1>じゃんけん</h1>
+</header>
+
+<main>
+  <ul>
+    <li id="gu_btn" data-id="0">グー</li>
+    <li id="cho_btn" data-id="1">チョキ</li>
+    <li id="par_btn" data-id="2">パー</li>
+  </ul>
+  <div>コンピュータの出した手は？「<span id="pc_hand">なに？</span>」</div>
+  <div id="judgement">勝ち</div>
+</main>
+
+<footer></footer>
+<script>
+// グー: 0, チョキ: 1, パー: 2  とします
+// 関数化してみよう！
+// (追加) 配列やオブジェクトを活用して情報をまとめてみよう！
+
+// コンピュータの手を表示
+const hand_text = ['グー','チョキ','パー'];
+function pc_hand(a){
+  $('#pc_hand').text(hand_text[a]);
+};
+
+// じゃんけんの結果を表示
+const judge_text = ['あいこ','負け','勝ち'];
+function judge(me, pc){
+  const resultNum = (me - pc + 3) % 3; // 0: あいこ, 1: 勝ち, 2: 負け
+  $('#judgement').text(judge_text[resultNum]);
+};
+
+function janken(){
+  const myHand = Number($(this).attr("data-id")); // グーを設定
+  const pcHand = Math.floor(Math.random() * 3); // コンピュータの手を計算
+  pc_hand(pcHand);
+  judge(myHand, pcHand);
+};
+
+// グーのボタンがクリックされたら実行する
+$('#gu_btn').on('click', janken);
+
+// チョキのボタンがクリックされたら実行する
+$('#cho_btn').on('click', janken);
+
+// パーのボタンがクリックされたら実行する
+$('#par_btn').on('click', janken);
+
+</script>
+</body>
+</html>

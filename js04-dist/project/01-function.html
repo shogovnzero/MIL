@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>関数</title>
+</head>
+<body>
+    <button id="button">クリック</button>
+<script src="./js/jquery-3.5.1.min.js"></script>
+<script>
+
+// 関数の基本形
+function hello(){
+    console.log("こんにちは");
+    console.log("JS授業中です")
+};
+hello();
+
+// 関数の引数・戻り値
+function hello2(t, u){
+    console.log(t);
+    console.log(u);
+};
+hello2("こんばんは", "岡本さん");
+
+function add(a,b){
+    return a+b;
+};
+console.log(add(4,5));
+
+// クリックイベント
+$("#button").on("click", function () {
+    alert("こんにちは");
+    alert("JS授業中です");
+});
+
+</script>
+
+</body>
+
+</html>

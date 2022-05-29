@@ -1,0 +1,96 @@
+body {
+    font-family: "Segoe UI", "Yu Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Meiryo UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: 12px;
+    z-index: 1;
+    width: 100%;
+    .container {
+        width: 100%;
+        min-width: 300px;
+        margin: 0px auto;
+        padding: 0;
+        text-align: left;
+        font-size: 16px;
+        header {
+            background-color: darkblue;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+            color: #fff;
+            h1 {
+                font-size:16px;
+            }
+            p {
+                font-size: 100%;
+                text-align: center;
+                border-bottom: 1px solid #fff;
+                height: 100px;
+                #keyword {
+                }
+                #load_music {
+                }
+            }
+        }
+        main {
+            border-bottom: 1px solid #ccc;
+            #content {
+                .search_result {
+                    padding: 0;
+                    border-top: 1px solid #000000;
+                    display: table;
+                    table-layout: fixed;
+                    width: 100%;
+                    li {
+                        text-align: center;
+                        list-style-type: none;
+                        border: 1px solid #666;
+                        background-color: #FFF;
+                        display: table-cell;
+                        cursor: pointer;
+                    }
+                    li:hover {
+                        background: #0066CC;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.btn.dropdown-toggle  {
+    width:150px;
+    text-align:left;
+}
+
+span.caret {
+    position: absolute;
+    left: 90%;
+    top: 45%;
+}
+
+label {
+    padding-top:5px;
+}
+
+.form-label {
+    padding-left:0px !important;
+}
+
+img {
+    width:140px;
+    height:140px;
+}
+
+.btn-success {
+    background-color: #3b7d4a!important;
+}
+
+.btn-success:hover {
+    background-color: #4daf64!important;
+}
+
+img.track {
+    border: 1px solid #8a8a8a;
+}

@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "小沢 正征",
+        "email": "ozw-msyk@example.or.jp"
+    },
+    {
+        "id": 2,
+        "name": "柳沢 佑治",
+        "email": "yuz1984@nifty.jp"
+    },
+    {
+        "id": 3,
+        "name": "古田 迪子",
+        "email": "hrt0406coara@coara.or.jp"
+    },
+    {
+        "id": 4,
+        "name": "大城 史男",
+        "email": "humio-ooki@mail.goo.ne.jp"
+    },
+    {
+        "id": 5,
+        "name": "宮本 新太郎",
+        "email": "sntru74@sunfield.ne.jp"
+    }
+]

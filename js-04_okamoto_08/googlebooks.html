@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<title>GoogleBooks検索</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+        <h1>GoogleBooks検索</h1>
+        <p>
+          <input type="text" id="keyword" placeholder= "search keyword">
+          <button id="load_music">Search</button>
+        </p>
+    </header>
+    <main>
+        <p id="content"></p>
+    </main>
+  </div>
+  
+
+<script>
+
+// get book title
+function search(t){
+  $("#content").empty();
+  $.get(`https://www.googleapis.com/books/v1/volumes?q=${t}`, function(data){
+    const items = data.items;
+    console.log(items);
+    for (let i = 0; i < items.length; i++) {
+      const title = items[i].volumeInfo.title;
+      const publisher = items[i].volumeInfo.publisher;
+      const publisheddate = items[i].volumeInfo.publishedDate;
+      const thumbnail = items[i].volumeInfo.imageLinks.thumbnail;
+      $("#content").append(`<ul class="search_result"><li>${title}</li><li>${publisher}</li><li>${publisheddate}</li><li><img src="${thumbnail}"></li></ul>`);
+    }
+  });
+};
+
+// search
+$("#readbook").on("click", function(){
+  const keyword = $("#keyword").val();
+  search(keyword);
+});
+
+$("#keyword").on("keydown", function(e){
+  if(e.keyCode === 13){
+    const keyword = $("#keyword").val();
+    search(keyword);
+  };
+});
+
+</script>
+</body>
+</html>
