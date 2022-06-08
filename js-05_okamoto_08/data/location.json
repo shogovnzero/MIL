@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Statue of Liberty (US)",
+        "lat": 40.689255631885246,
+        "lon": -74.04453759690873
+    },{
+        "id": 2,
+        "name": "the Eiffel Tower (France)",
+        "lat": 48.858254081128756,
+        "lon": 2.2945203083191
+    },{
+        "id": 3,
+        "name": "Tokyo Tower (Japan)",
+        "lat": 35.658571218137396,
+        "lon": 139.74541680367085
+    },{
+        "id": 4,
+        "name": "Christ the Redeemer: Corcovado (Brazil)",
+        "lat": -22.9519159439763,
+        "lon": -43.21048990651321
+    },{
+        "id": 5,
+        "name": "Merlion (Singapore)",
+        "lat": 1.286792493448055,
+        "lon": 103.85450827627275
+    },{
+        "id": 6,
+        "name": "Sydney Opera House (Australia)",
+        "lat": -33.85677467421547,
+        "lon": 151.21530193092093
+    },{
+        "id": 7,
+        "name": "Burj Khalifa (UAE)",
+        "lat": 25.197200017642622,
+        "lon": 55.27428184874605
+    }
+]

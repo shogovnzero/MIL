@@ -1,0 +1,24 @@
+body {
+    header {
+        h1{}
+    }
+    main {
+        .target {
+            h2{}
+            #location_name {}
+        }
+        .input_area {
+            .player {
+                h2 {}
+                .player_lat {}
+                .player_lon {}
+                .player_result {}
+            }
+        }
+        .result {
+            #result_btn {}
+            #result_map {}   
+        }
+    }
+    footer {}
+}
