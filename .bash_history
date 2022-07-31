@@ -19,3 +19,11 @@ cd ~
 pwd
 cd react01_okamoto_08
 npm start
+echo ~
+cd ~
+pwd
+cd react01_okamoto_08
+npm start
+npm start
+npm i axios
+npm start
